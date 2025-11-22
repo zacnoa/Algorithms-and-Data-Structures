@@ -1,21 +1,21 @@
-package Strukture;
+package Structures;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Heap<T extends Comparable<T>> {
+public class Heap<E> {
 
 
 
-    private List<T> heapList;
-    Comparator<T> comparator;
+    protected List<E> heapList;
+    Comparator<E> comparator;
 
-    public Heap(List<T> listToHeapify, Comparator<T> comparator)
+    public Heap(List<E> listToHeapify, Comparator<E> comparator)
     {
         this.heapList = new ArrayList<>(listToHeapify);
         this.comparator=comparator;
-        buildMaxHeap();
+        buildHeap();
 
     }
 
@@ -33,14 +33,14 @@ public class Heap<T extends Comparable<T>> {
         return (index-1)/2;
     }
 
-    private Boolean compareKeys(T a,T b)
+    private Boolean compareKeys(E a,E b)
     {
         return comparator.compare(a,b)>0;
     }
 
-    private void swapValues(Integer a,Integer b)
+     protected void swapValues(Integer a, Integer b)
     {
-        T temp= heapList.get(a);
+        E temp= heapList.get(a);
         heapList.set(a, heapList.get(b));
         heapList.set(b,temp);
     }
@@ -64,7 +64,7 @@ public class Heap<T extends Comparable<T>> {
         }
 
     }
-    protected void buildMaxHeap()
+    protected void buildHeap()
     {
 
         for(Integer i = heapList.size()/2-1; i>=0; i--)
@@ -73,10 +73,10 @@ public class Heap<T extends Comparable<T>> {
         }
 
     }
-      public List<T> heapSort()
+      public List<E> heapSort()
     {
-        List<T> sortedList=new ArrayList<>();
-        List<T> tempHeapList=new ArrayList<>(this.heapList);
+        List<E> sortedList=new ArrayList<>();
+        List<E> tempHeapList=new ArrayList<>(this.heapList);
         for(int i=tempHeapList.size()/2-1;i>=1;i--)
         {
             sortedList.addLast(tempHeapList.getFirst());
@@ -87,10 +87,7 @@ public class Heap<T extends Comparable<T>> {
         }
         return sortedList;
     }
-    public T getTop()
-    {
-        return heapList.getFirst();
-    }
+
 
 
 
